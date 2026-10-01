@@ -179,25 +179,24 @@ const SC=[
 /* ====== 3) APP ====== */
 const $=document.getElementById("app");
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let mode="quiz", i=0, pts=0, order=[];
+let i=0, pts=0, order=[];
 const sid=Math.random().toString(36).slice(2,10);
 
 function start(){
   i=0;pts=0;order=[...SC.keys()].sort(()=>Math.random()-.5);
   $.innerHTML=`<div class="stop" aria-hidden="true">STOP</div>
   <h1>Würdest du STOP sagen?</h1>
-  <p class="lead">${SC.length} Situationen aus Produktion, Labor und Büro. Nicht in jeder Situation ist STOP nötig. Schau genau hin. Wähle, wie du üben möchtest.</p>
-  <button class="mode" data-m="quiz"><b>Quiz</b><span>Mit Punkten. Die sicherste Handlung zählt am meisten.</span></button>
-  <button class="mode" data-m="reflect"><b>Was würdest du tun?</b><span>Ohne Punkte. Du siehst, wie sich Kolleginnen und Kollegen entscheiden.</span></button>
+  <p class="lead">${SC.length} Situationen aus Produktion, Labor und Büro. Nicht in jeder Situation ist STOP nötig. Schau genau hin.</p>
+  <button class="primary" id="go">Quiz starten</button>
   <button class="mode" id="st"><b>Teamergebnisse</b><span>Wo entscheiden wir uns sicher und wo lohnt sich ein Gespräch?</span></button>
   <p><small>Antworten werden anonym gespeichert${db?"":" (derzeit nur lokal, da keine Datenbank verbunden ist)"}.</small></p>`;
-  $.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{mode=b.dataset.m;show()});
+  document.getElementById("go").onclick=show;
   document.getElementById("st").onclick=stats;
 }
 
 function show(){
   const id=order[i], s=SC[id];
-  $.innerHTML=`<div class="top"><span>Situation ${i+1} von ${SC.length}</span><span>${mode==="quiz"?pts+" Punkte":"Ohne Wertung"}</span></div>
+  $.innerHTML=`<div class="top"><span>Situation ${i+1} von ${SC.length}</span><span>${pts} Punkte</span></div>
   <div class="bar"><i style="width:${i/SC.length*100}%"></i></div>
   <div class="card"><div class="area">${esc(s.a)}</div><h2 style="margin-top:6px">${esc(s.q)}</h2></div>
   <div id="opts">${s.o.map((o,k)=>[o,k]).sort(()=>Math.random()-.5).map(([o,k])=>`<button class="opt" data-k="${k}">${esc(o.t)}</button>`).join("")}</div>
@@ -207,7 +206,7 @@ function show(){
 
 async function answer(id,k){
   const s=SC[id], o=s.o[k];
-  if(mode==="quiz")pts+=o.s;
+  pts+=o.s;
   document.querySelectorAll(".opt").forEach(b=>{
     const n=+b.dataset.k; b.disabled=true;
     const sc=s.o[n].s;
@@ -225,21 +224,22 @@ async function answer(id,k){
   const counts=s.o.map(()=>0);
   try{
     if(db){
-      await fs.addDoc(fs.collection(db,"stop_answers"),{sid,sc:id,opt:k,pts:o.s,mode,ts:fs.serverTimestamp()});
+      await fs.addDoc(fs.collection(db,"stop_answers"),{sid,sc:id,opt:k,pts:o.s,ts:fs.serverTimestamp()});
       const snap=await fs.getDocs(fs.query(fs.collection(db,"stop_answers"),fs.where("sc","==",id)));
       snap.forEach(d=>{const v=d.data().opt; if(counts[v]!==undefined)counts[v]++});
     } else counts[k]=1;
   }catch(e){console.error(e);counts[k]=1}
   const tot=counts.reduce((a,b)=>a+b,0)||1;
-  document.querySelectorAll(".pct").forEach(p=>{ const n=+p.parentElement.dataset.k; if(db||mode==="reflect") p.textContent=Math.round(counts[n]/tot*100)+" %"; });
+  document.querySelectorAll(".pct").forEach(p=>{ const n=+p.parentElement.dataset.k; if(db) p.textContent=Math.round(counts[n]/tot*100)+" %"; });
 }
 
 function end(){
   const max=SC.length;
   const msg=pts>=max*.85?"Stark. Du erkennst unsichere Zustände sicher.":pts>=max*.6?"Solide. Einige Situationen lohnen sich noch einmal.":"Gut, dass du geübt hast. Im Zweifel gilt immer STOP.";
   $.innerHTML=`<div class="stop" aria-hidden="true">STOP</div>
-  <h1>${mode==="quiz"?"Dein Ergebnis":"Geschafft"}</h1>
-  ${mode==="quiz"?`<p class="score">${pts} / ${max}</p><p class="lead">${msg}</p>`:`<p class="lead">Sprecht in eurem Team darüber: Wo war die Entscheidung schwierig, und was hätte euch geholfen, STOP zu sagen?</p>`}
+  <h1>Dein Ergebnis</h1>
+  <p class="score">${pts} / ${max}</p><p class="lead">${msg}</p>
+  <p>Sprecht in eurem Team darüber: Wo war die Entscheidung schwierig, und was hätte euch geholfen, STOP zu sagen?</p>
   <div class="why"><b>Zum Mitnehmen:</b> STOP darf jeder sagen, jederzeit, zu jedem. Niemand wird dafür kritisiert, auch nicht bei einem Fehlalarm.</div>
   <button class="primary" id="again">Nochmal üben</button>
   <button id="st2">Teamergebnisse ansehen</button>`;
