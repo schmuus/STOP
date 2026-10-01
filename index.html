@@ -28,7 +28,6 @@ button.mode span{font-weight:400;color:var(--mute)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:16px}
 .area{font-weight:600;color:var(--red)}
 .opt.best{background:var(--tint-g);border-color:var(--green)}
-.opt.ok{background:var(--tint-a);border-color:var(--amber)}
 .opt.bad{background:var(--tint-r);border-color:var(--red)}
 .opt:disabled{cursor:default;opacity:1}
 .fb{margin:6px 0 0;font-weight:400;color:var(--ink);font-size:16px}
@@ -71,85 +70,110 @@ if (FIREBASE_CONFIG.apiKey) {
    Passe die Texte an eure Anlage und Abläufe an. */
 const SC=[
 {a:"Produktion",q:"Ein Ventil an einer Rohrleitung lässt sich nur schwer öffnen. Ein Kollege holt ein Rohr als Hebelverlängerung und sagt: „Nur kurz, die Charge wartet.“",
- o:[{t:"Kollege stoppen, Arbeit unterbrechen und den Schichtleiter informieren",s:2,f:"Richtig. Ein klemmendes Ventil ist ein Signal. Gewalt kann Dichtungen oder Leitungen beschädigen und Stoffe freisetzen."},
+ o:[{t:"Kollege stoppen, Arbeit unterbrechen und den Schichtleiter informieren",s:1,f:"Richtig. Ein klemmendes Ventil ist ein Signal. Gewalt kann Dichtungen oder Leitungen beschädigen und Stoffe freisetzen."},
     {t:"Zuschauen, er macht das schon lange",s:0,f:"Erfahrung schützt nicht vor Leckagen. Wer es sieht, ist mitverantwortlich."},
     {t:"Ihm helfen, zu zweit geht es schneller",s:0,f:"Mehr Kraft löst die Ursache nicht und erhöht das Risiko."}],
  w:"Ein unerwarteter Widerstand ist ein unsicherer Zustand. Erst die Ursache klären, dann weiterarbeiten."},
 {a:"Labor",q:"Am Abzug steht ein unbeschriftetes Becherglas mit klarer Flüssigkeit. Du willst gerade deine Probe vorbereiten.",
- o:[{t:"STOP: nichts anfassen, Laborleitung informieren und den Platz sichern",s:2,f:"Richtig. Unbekannter Inhalt ist nicht handhabbar. Entsorgung erst nach Identifizierung."},
+ o:[{t:"STOP: nichts anfassen, Laborleitung informieren und den Platz sichern",s:1,f:"Richtig. Unbekannter Inhalt ist nicht handhabbar. Entsorgung erst nach Identifizierung."},
     {t:"Daran riechen, um zu erkennen, was es ist",s:0,f:"Nie. Riechen kann selbst eine Vergiftung auslösen."},
     {t:"Wegkippen und weiterarbeiten",s:0,f:"Unbekannte Stoffe können beim Mischen gefährlich reagieren."}],
  w:"Alles, was nicht eindeutig gekennzeichnet ist, gilt als unsicher."},
-{a:"Büro",q:"Eine Brandschutztür im Flur wird mit einem Keil offen gehalten. Das machen alle so, weil es bequemer ist.",
- o:[{t:"Keil entfernen und kurz ansprechen, warum das nicht geht",s:2,f:"Richtig. Auch im Büro ist STOP angebracht. Die Tür muss im Brandfall schließen."},
+{a:"Büro",q:"Eine Brandschutztür im Flur wird mit einem Keil offen gehalten.",
+ o:[{t:"Keil entfernen und kurz ansprechen, warum das nicht geht",s:1,f:"Richtig. Auch im Büro ist STOP angebracht. Die Tür muss im Brandfall schließen."},
     {t:"Nichts tun, es ist ja nur das Büro",s:0,f:"Im Brandfall breitet sich Rauch über offene Türen aus."},
-    {t:"Eine Mail an alle schreiben und den Keil lassen",s:1,f:"Gut gemeint, aber der unsichere Zustand bleibt bestehen. Erst herstellen, dann informieren."}],
+    {t:"Eine Mail an alle schreiben und den Keil lassen",s:0,f:"Gut gemeint, aber der unsichere Zustand bleibt bestehen. Erst herstellen, dann informieren."}],
  w:"STOP gilt im ganzen Haus, nicht nur dort, wo mit Chemikalien gearbeitet wird."},
 {a:"Produktion",q:"Während einer Abfüllung beginnt ein Gaswarngerät zu alarmieren. Der Vorgesetzte sagt: „Wahrscheinlich Fehlalarm, wir machen fertig.“",
- o:[{t:"STOP sagen, Abfüllung anhalten, Bereich verlassen und Alarm klären lassen",s:2,f:"Richtig. Ein Alarm gilt als echt, bis das Gegenteil bewiesen ist. Auch gegenüber Vorgesetzten gilt STOP."},
+ o:[{t:"STOP sagen, Abfüllung anhalten, Bereich verlassen und Alarm klären lassen",s:1,f:"Richtig. Ein Alarm gilt als echt, bis das Gegenteil bewiesen ist. Auch gegenüber Vorgesetzten gilt STOP."},
     {t:"Weitermachen und das Gerät beobachten",s:0,f:"Zeit ist hier kein Argument. Wenn der Alarm stimmt, ist es danach zu spät."},
     {t:"Dem Vorgesetzten glauben, er hat mehr Erfahrung",s:0,f:"STOP darf jeder sagen, unabhängig von Rang und Erfahrung."}],
  w:"Ein Fehlalarm ist kein Fehler beim Stoppen. Gestoppt wird im Zweifel immer."},
 {a:"Labor",q:"Der Abzug zeigt einen Strömungsalarm. Deine Reaktion läuft bereits und die Lösung ist fast fertig.",
- o:[{t:"Reaktion sicher stoppen (soweit gefahrlos möglich), Schieber schließen, Alarm melden",s:2,f:"Richtig. Ohne Abzugsleistung können Dämpfe in den Raum gelangen."},
+ o:[{t:"Reaktion sicher stoppen (soweit gefahrlos möglich), Schieber schließen, Alarm melden",s:1,f:"Richtig. Ohne Abzugsleistung können Dämpfe in den Raum gelangen."},
     {t:"Schnell fertig machen, dann melden",s:0,f:"Fertigstellen unter Alarm ist genau der Zustand, den STOP verhindern soll."},
     {t:"Fenster öffnen",s:0,f:"Das verändert die Luftführung und löst das Problem nicht."}],
  w:"Sichere Zustände zuerst. Ein Ergebnis ist nie wichtiger als die Gesundheit."},
 {a:"Büro",q:"Ein Besucher läuft ohne Begleitung und ohne Besucherausweis Richtung Produktionshalle.",
- o:[{t:"Freundlich ansprechen, begleiten und den Ansprechpartner informieren",s:2,f:"Richtig. Besucher kennen die Gefahren nicht. Ansprechen ist Teil der Sicherheitskultur."},
+ o:[{t:"Freundlich ansprechen, begleiten und den Ansprechpartner informieren",s:1,f:"Richtig. Besucher kennen die Gefahren nicht. Ansprechen ist Teil der Sicherheitskultur."},
     {t:"Weitergehen, jemand anderes wird sich kümmern",s:0,f:"Wenn alle so denken, kümmert sich niemand."},
-    {t:"Ihn selbst durch die Halle führen",s:1,f:"Gut gemeint, aber ohne Einweisung und Schutzausrüstung darf er nicht hinein."}],
+    {t:"Ihn selbst durch die Halle führen",s:0,f:"Gut gemeint, aber ohne Einweisung und Schutzausrüstung darf er nicht hinein."}],
  w:"Verantwortung heißt: Wer es merkt, handelt."},
 {a:"Alle Bereiche",q:"Du bist unsicher, ob eine Situation wirklich STOP-würdig ist. Alle anderen arbeiten weiter und du willst nicht stören.",
- o:[{t:"STOP sagen und nachfragen. Bei Zweifel gilt: lieber einmal zu viel",s:2,f:"Richtig. Niemand wird für ein berechtigtes Nachfragen kritisiert, auch bei einem Fehlalarm nicht."},
+ o:[{t:"STOP sagen und nachfragen. Bei Zweifel gilt: lieber einmal zu viel",s:1,f:"Richtig. Niemand wird für ein berechtigtes Nachfragen kritisiert, auch bei einem Fehlalarm nicht."},
     {t:"Abwarten, ob etwas passiert",s:0,f:"Sicherheit wartet nicht auf einen Vorfall."},
-    {t:"Später privat den Kollegen fragen",s:1,f:"Besser als nichts, aber die Gefahr ist in der Zwischenzeit noch da."}],
+    {t:"Später privat den Kollegen fragen",s:0,f:"Besser als nichts, aber die Gefahr ist in der Zwischenzeit noch da."}],
  w:"Die größte Hürde ist nicht das Wissen, sondern die Scheu zu stören."},
 {a:"Produktion",q:"Ein Probenahmepunkt ist nur noch an einem abgerissenen Etikett zu erkennen. Die Probe soll in 10 Minuten im Labor sein.",
- o:[{t:"STOP: Punkt anhand von Fließbild oder mit Schichtleiter eindeutig klären, Etikett erneuern lassen",s:2,f:"Richtig. Falsche Entnahmestelle bedeutet falsche Stoffe oder unerwartete Drücke."},
+ o:[{t:"STOP: Punkt anhand von Fließbild oder mit Schichtleiter eindeutig klären, Etikett erneuern lassen",s:1,f:"Richtig. Falsche Entnahmestelle bedeutet falsche Stoffe oder unerwartete Drücke."},
     {t:"Nach Gefühl den vermutlich richtigen Punkt nehmen",s:0,f:"Raten gilt nicht. Zeitdruck ist kein Grund für Unklarheit."},
-    {t:"Den Kollegen von gestern anrufen und danach entscheiden",s:1,f:"Besser als Raten, aber verlässlich ist nur die Dokumentation vor Ort."}],
+    {t:"Den Kollegen von gestern anrufen und danach entscheiden",s:0,f:"Besser als Raten, aber verlässlich ist nur die Dokumentation vor Ort."}],
  w:"Fehlende Kennzeichnung ist selbst ein unsicherer Zustand."},
 {a:"Labor",q:"Du sollst schnell etwas im Abzug umfüllen. Der Frontschieber steht weit offen, weil du so besser an die Geräte kommst.",
- o:[{t:"Schieber auf Arbeitshöhe schließen und den Aufbau so anpassen, dass es damit geht",s:2,f:"Richtig. Der Schieber ist Schutzscheibe und Absaugung zugleich. Offen schützt der Abzug nicht mehr zuverlässig."},
+ o:[{t:"Schieber auf Arbeitshöhe schließen und den Aufbau so anpassen, dass es damit geht",s:1,f:"Richtig. Der Schieber ist Schutzscheibe und Absaugung zugleich. Offen schützt der Abzug nicht mehr zuverlässig."},
     {t:"Offen lassen, es ist ja nur ein kurzer Schritt",s:0,f:"Gerade kurze Schritte führen zu Spritzern oder Dämpfen im Gesicht."},
     {t:"Schieber nur halb schließen und den Kopf in den Abzug stecken",s:0,f:"Der Kopf gehört nie in den Abzug. Dort sind die Dämpfe am dichtesten."}],
  w:"Ein Abzug schützt nur, wenn er richtig benutzt wird."},
 {a:"Alle Bereiche",q:"Für die Aufgabe brauchst du eigentlich Schutzhandschuhe, die gegen das Lösemittel beständig sind. Die liegen im Lager am anderen Ende, die normalen Handschuhe hast du an.",
- o:[{t:"STOP: erst die passende PSA holen, dann beginnen",s:2,f:"Richtig. Der Weg ist kurz im Vergleich zu einer Hautverätzung oder Vergiftung."},
+ o:[{t:"STOP: erst die passende PSA holen, dann beginnen",s:1,f:"Richtig. Der Weg ist kurz im Vergleich zu einer Hautverätzung oder Vergiftung."},
     {t:"Mit den vorhandenen Handschuhen anfangen und schnell arbeiten",s:0,f:"Falsche Handschuhe können in Sekunden durchdrungen werden. Schnelligkeit hilft nicht."},
     {t:"Zwei Paar normale Handschuhe übereinander tragen",s:0,f:"Doppelt falsch ist nicht richtig. Maßgeblich ist die Beständigkeit, nicht die Anzahl."}],
  w:"Fehlende oder falsche PSA ist ein STOP-Grund, keine Kleinigkeit."},
 {a:"Produktion",q:"Der Weg über den markierten Fußgängerweg wäre 40 Meter länger. Ihr kürzt über die Fahrzeugfläche ab, wie viele andere auch.",
- o:[{t:"Auf dem markierten Weg bleiben und Kollegen freundlich darauf ansprechen",s:2,f:"Richtig. Markierungen trennen Fußgänger und Fahrzeuge. Außerhalb sehen dich Fahrer oft zu spät."},
-    {t:"Abkürzen, aber gut nach Fahrzeugen schauen",s:1,f:"Aufmerksamkeit hilft, ersetzt aber keine Trennung. Fahrer sehen dich nicht überall."},
+ o:[{t:"Auf dem markierten Weg bleiben und Kollegen freundlich darauf ansprechen",s:1,f:"Richtig. Markierungen trennen Fußgänger und Fahrzeuge. Außerhalb sehen dich Fahrer oft zu spät."},
+    {t:"Abkürzen, aber gut nach Fahrzeugen schauen",s:0,f:"Aufmerksamkeit hilft, ersetzt aber keine Trennung. Fahrer sehen dich nicht überall."},
     {t:"Abkürzen, wenn es eilig ist",s:0,f:"Zeitdruck macht Abkürzungen nicht sicherer."}],
  w:"Wege und Markierungen gelten für alle, auch bei Eile."},
 {a:"Alle Bereiche",q:"Ein Kollege geht mit dem Handy in der Hand die Treppe hinunter und liest dabei eine Nachricht.",
- o:[{t:"Ansprechen: Handy weg oder stehenbleiben, erst dann lesen",s:2,f:"Richtig. Wer aufs Display schaut, übersieht Stufen, Hindernisse und Fahrzeuge."},
+ o:[{t:"Ansprechen: Handy weg oder stehenbleiben, erst dann lesen",s:1,f:"Richtig. Wer aufs Display schaut, übersieht Stufen, Hindernisse und Fahrzeuge."},
     {t:"Nichts sagen, ist ja nur ein Handy",s:0,f:"Stürze auf Treppen gehören zu den häufigsten Unfällen."},
     {t:"Selbst auch kurz aufs Handy schauen, es muss ja schnell gehen",s:0,f:"Nachahmen verstärkt das Verhalten. Vorbild sein wirkt besser."}],
  w:"Beim Gehen gehören beide Augen und mindestens eine Hand dem Weg."},
 {a:"Labor",q:"Aus der Rohrpost kommt eine Probenkapsel an, aus der Flüssigkeit tropft.",
- o:[{t:"STOP: nicht ohne PSA anfassen, Bereich absperren, Vorgesetzte und Labor informieren",s:2,f:"Richtig. Inhalt und Gefahr sind unbekannt. Zuerst absichern, dann nach Vorgabe aufnehmen und entsorgen."},
+ o:[{t:"STOP: nicht ohne PSA anfassen, Bereich absperren, Vorgesetzte und Labor informieren",s:1,f:"Richtig. Inhalt und Gefahr sind unbekannt. Zuerst absichern, dann nach Vorgabe aufnehmen und entsorgen."},
     {t:"Mit Papiertuch aufwischen und Kapsel weiterreichen",s:0,f:"Ohne Wissen über den Stoff droht Hautkontakt, Dämpfe oder Verschleppung."},
     {t:"Kapsel wieder zurückschicken",s:0,f:"Das verteilt den Stoff weiter in der Anlage."}],
  w:"Unbekannter Austritt heißt: sichern, melden, nicht improvisieren."},
 {a:"Alle Bereiche",q:"Du bist nach einem Streit frustriert und hast Zeitdruck. Du merkst, dass du unkonzentriert bist, sollst aber gleich eine Aufgabe mit Chemikalien erledigen.",
- o:[{t:"STOP für mich selbst: Vorgesetzte informieren, kurz durchatmen oder die Aufgabe übergeben",s:2,f:"Richtig. Nicht fit zu sein, ist ein Sicherheitsrisiko. Das zu sagen ist stark, nicht schwach."},
+ o:[{t:"STOP für mich selbst: Vorgesetzte informieren, kurz durchatmen oder die Aufgabe übergeben",s:1,f:"Richtig. Nicht fit zu sein, ist ein Sicherheitsrisiko. Das zu sagen ist stark, nicht schwach."},
     {t:"Durchziehen, damit es erledigt ist",s:0,f:"Unkonzentriertheit führt zu Fehlgriffen und Unfällen."},
     {t:"Schneller arbeiten, um den Frust loszuwerden",s:0,f:"Tempo und Wut sind eine gefährliche Kombination."}],
  w:"STOP gilt auch für den eigenen Zustand."},
 {a:"Labor",q:"Im Probenschrank liegt ein Probenröhrchen ohne Etikett. Der Kunde wartet auf das Ergebnis.",
- o:[{t:"Nicht analysieren, Herkunft klären und gegebenenfalls Probe neu anfordern",s:2,f:"Richtig. Ohne Zuordnung ist das Ergebnis wertlos und kann falsche Entscheidungen auslösen."},
+ o:[{t:"Nicht analysieren, Herkunft klären und gegebenenfalls Probe neu anfordern",s:1,f:"Richtig. Ohne Zuordnung ist das Ergebnis wertlos und kann falsche Entscheidungen auslösen."},
     {t:"Nach Gefühl einer Probenliste zuordnen",s:0,f:"Eine Verwechslung kann Qualität und Sicherheit gefährden."},
-    {t:"Analysieren und im Bericht auf die Unsicherheit hinweisen",s:1,f:"Besser als verschweigen, aber trotzdem verschwendet und riskant."}],
+    {t:"Analysieren und im Bericht auf die Unsicherheit hinweisen",s:0,f:"Besser als verschweigen, aber trotzdem verschwendet und riskant."}],
  w:"Ohne eindeutige Kennzeichnung gibt es keine Weiterverarbeitung."},
 {a:"Labor",q:"Ein Glaskolben hat am Rand einen kleinen Absplitter. Du brauchst genau diese Größe für den Ansatz, der gleich unter Vakuum laufen soll.",
- o:[{t:"Kolben nicht verwenden, in den Glasbruchbehälter geben und ein intaktes Gerät nehmen",s:2,f:"Richtig. Beschädigtes Glas kann unter Vakuum oder Hitze zerspringen."},
+ o:[{t:"Kolben nicht verwenden, mit Schnittschutzhandschuhen in den Glasbruchbehälter geben und ein intaktes Gerät nehmen",s:1,f:"Richtig. Beschädigtes Glas kann unter Vakuum oder Hitze zerspringen und Schnittverletzungen verursachen. Bei der Entsorgung Schnittschutzhandschuhe tragen."},
     {t:"Verwenden, aber hinter dem Schieber arbeiten",s:0,f:"Der Schieber mindert Folgen, aber der Defekt bleibt. Erst vermeiden, dann schützen."},
     {t:"Mit Klebeband sichern",s:0,f:"Klebeband verhindert kein Springen und wird vom Lösemittel angegriffen."}],
- w:"Glas mit Schäden ist Ausschuss, ohne Ausnahme."}
+ w:"Glas mit Schäden ist Ausschuss, ohne Ausnahme."},
+{a:"Labor",q:"Am Abzug steht ein Becherglas mit vollständigem Etikett (Stoffname, Gefahrenpiktogramm, Datum, Kürzel). Der Frontschieber steht auf Arbeitshöhe, es gibt keinen Alarm. Du willst mit deiner Arbeit weitermachen.",
+ o:[{t:"Weiterarbeiten. Es gibt hier nichts zu beanstanden",s:1,f:"Richtig. Der Inhalt ist eindeutig gekennzeichnet und der Abzug wird korrekt benutzt. Es gibt keinen unsicheren Zustand."},
+    {t:"STOP sagen und die Laborleitung holen",s:0,f:"Hier war alles in Ordnung: Etikett vollständig, Schieber richtig, kein Alarm. Bei echten Zweifeln ist Nachfragen immer erlaubt, hier gab es aber keinen Grund."},
+    {t:"Den Inhalt vorsichtshalber entsorgen",s:0,f:"Ein korrekt gekennzeichneter Stoff muss nicht entsorgt werden."}],
+ w:"STOP heißt auch: erkennen, wann alles in Ordnung ist."},
+{a:"Produktion",q:"Ein Kollege öffnet ein Ventil am Handrad, ohne Gewalt und ohne Hilfsmittel. Er trägt die vorgeschriebene PSA und der Bereich ist ordnungsgemäß abgesperrt.",
+ o:[{t:"Nichts unternehmen. Die Arbeit läuft wie vorgesehen",s:1,f:"Richtig. Handrad ohne Gewalt, PSA vorhanden, Bereich abgesperrt: Das ist ein sicherer Ablauf."},
+    {t:"Ihn unterbrechen und den Schichtleiter holen",s:0,f:"Es gibt keinen unsicheren Zustand. Unnötiges Unterbrechen kann selbst zu Fehlern führen."},
+    {t:"Ihn bitten, zur Sicherheit auch noch den Bereich zu räumen",s:0,f:"Die Absperrung ist bereits ausreichend und vorgesehen."}],
+ w:"Wer den sicheren Zustand erkennt, kann gelassen weiterarbeiten."},
+{a:"Produktion",q:"Du gehst auf dem markierten Fußweg. Ein Stapler kreuzt vor dir in der Fahrzone. Der Fahrer hat Blickkontakt mit dir aufgenommen und wird dich passieren lassen.",
+ o:[{t:"Auf dem Fußweg bleiben, den Stapler passieren lassen und dann weitergehen",s:1,f:"Richtig. Du bist im richtigen Bereich und der Fahrer hat dich gesehen. Die Situation ist unter Kontrolle."},
+    {t:"STOP rufen und den Stapler anhalten lassen",s:0,f:"Es gibt keinen unsicheren Zustand. Wer STOP ruft, obwohl alles korrekt läuft, bremst unnötig."},
+    {t:"Schnell vor dem Stapler über die Fahrzone laufen",s:0,f:"Nie. Auch mit Blickkontakt gehören Fußgänger nicht in die Fahrzone."}],
+ w:"Markierungen, Blickkontakt und Vorfahrt klären das Zusammenspiel."},
+{a:"Alle Bereiche",q:"Ein Kollege bleibt am Rand des Flurs stehen und liest eine Nachricht auf dem Handy. Er steht weder auf einer Treppe noch im Weg.",
+ o:[{t:"Nichts sagen und weitergehen",s:1,f:"Richtig. Er steht sicher und blockiert niemanden. Das ist genau das richtige Verhalten."},
+    {t:"Ihn ansprechen und auffordern, das Handy wegzustecken",s:0,f:"Es gibt keinen unsicheren Zustand. Hier wäre Ansprechen überflüssig und würde Vertrauen kosten."},
+    {t:"Den Vorgesetzten über den Kollegen informieren",s:0,f:"Ohne Gefährdung gibt es nichts zu melden."}],
+ w:"Entscheidend ist nicht das Handy, sondern ob jemand beim Gehen abgelenkt ist."},
+{a:"Alle Bereiche",q:"Ein Alarm ertönt. Er wurde für heute und diese Uhrzeit offiziell als Probealarm der Sirenenanlage angekündigt und klingt wie angekündigt. Eine Räumung ist nicht vorgesehen.",
+ o:[{t:"Wie angekündigt weiterarbeiten",s:1,f:"Richtig. Der Alarm ist angekündigt, bekannt und erfordert keine Maßnahme."},
+    {t:"Alle Arbeiten abbrechen und den Bereich räumen",s:0,f:"Eine Räumung ist für diesen Probealarm nicht vorgesehen. Prüfe immer die Ankündigung."},
+    {t:"Künftig jeden Alarm als Probealarm betrachten",s:0,f:"Nein. Nur ein angekündigter Probealarm ist harmlos. Im Zweifel gilt ein Alarm als echt."}],
+ w:"Prüfe, was angekündigt ist. Ohne Ankündigung gilt jeder Alarm als echt."}
 ];
 
 /* ====== 3) APP ====== */
@@ -162,7 +186,7 @@ function start(){
   i=0;pts=0;order=[...SC.keys()].sort(()=>Math.random()-.5);
   $.innerHTML=`<div class="stop" aria-hidden="true">STOP</div>
   <h1>Würdest du STOP sagen?</h1>
-  <p class="lead">${SC.length} Situationen aus Produktion, Labor und Büro. Wähle, wie du üben möchtest.</p>
+  <p class="lead">${SC.length} Situationen aus Produktion, Labor und Büro. Nicht in jeder Situation ist STOP nötig. Schau genau hin. Wähle, wie du üben möchtest.</p>
   <button class="mode" data-m="quiz"><b>Quiz</b><span>Mit Punkten. Die sicherste Handlung zählt am meisten.</span></button>
   <button class="mode" data-m="reflect"><b>Was würdest du tun?</b><span>Ohne Punkte. Du siehst, wie sich Kolleginnen und Kollegen entscheiden.</span></button>
   <button class="mode" id="st"><b>Teamergebnisse</b><span>Wo entscheiden wir uns sicher und wo lohnt sich ein Gespräch?</span></button>
@@ -176,7 +200,7 @@ function show(){
   $.innerHTML=`<div class="top"><span>Situation ${i+1} von ${SC.length}</span><span>${mode==="quiz"?pts+" Punkte":"Ohne Wertung"}</span></div>
   <div class="bar"><i style="width:${i/SC.length*100}%"></i></div>
   <div class="card"><div class="area">${esc(s.a)}</div><h2 style="margin-top:6px">${esc(s.q)}</h2></div>
-  <div id="opts">${s.o.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o.t)}</button>`).join("")}</div>
+  <div id="opts">${s.o.map((o,k)=>[o,k]).sort(()=>Math.random()-.5).map(([o,k])=>`<button class="opt" data-k="${k}">${esc(o.t)}</button>`).join("")}</div>
   <div id="res"></div>`;
   $.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(id,+b.dataset.k));
 }
@@ -184,14 +208,14 @@ function show(){
 async function answer(id,k){
   const s=SC[id], o=s.o[k];
   if(mode==="quiz")pts+=o.s;
-  document.querySelectorAll(".opt").forEach((b,n)=>{
-    b.disabled=true;
+  document.querySelectorAll(".opt").forEach(b=>{
+    const n=+b.dataset.k; b.disabled=true;
     const sc=s.o[n].s;
-    b.classList.add(sc===2?"best":sc===1?"ok":"bad");
+    b.classList.add(sc===1?"best":"bad");
     if(n===k) b.style.borderWidth="4px";
     b.insertAdjacentHTML("beforeend",`<span class="pct"></span>${n===k?`<p class="fb">${esc(s.o[n].f)}</p>`:""}`);
   });
-  const best=s.o.findIndex(x=>x.s===2);
+  const best=s.o.findIndex(x=>x.s===1);
   const res=document.getElementById("res");
   res.innerHTML=`${k!==best?`<div class="card"><b>Sicherste Handlung:</b> ${esc(s.o[best].t)}<p class="fb">${esc(s.o[best].f)}</p></div>`:""}
   <div class="why"><b>Merksatz:</b> ${esc(s.w)}</div>
@@ -207,11 +231,11 @@ async function answer(id,k){
     } else counts[k]=1;
   }catch(e){console.error(e);counts[k]=1}
   const tot=counts.reduce((a,b)=>a+b,0)||1;
-  document.querySelectorAll(".pct").forEach((p,n)=>{ if(db||mode==="reflect") p.textContent=Math.round(counts[n]/tot*100)+" %"; });
+  document.querySelectorAll(".pct").forEach(p=>{ const n=+p.parentElement.dataset.k; if(db||mode==="reflect") p.textContent=Math.round(counts[n]/tot*100)+" %"; });
 }
 
 function end(){
-  const max=SC.length*2;
+  const max=SC.length;
   const msg=pts>=max*.85?"Stark. Du erkennst unsichere Zustände sicher.":pts>=max*.6?"Solide. Einige Situationen lohnen sich noch einmal.":"Gut, dass du geübt hast. Im Zweifel gilt immer STOP.";
   $.innerHTML=`<div class="stop" aria-hidden="true">STOP</div>
   <h1>${mode==="quiz"?"Dein Ergebnis":"Geschafft"}</h1>
@@ -223,7 +247,7 @@ function end(){
   document.getElementById("st2").onclick=stats;
 }
 /* Kurzbezeichnungen für die Teamergebnisse. Reihenfolge muss mit SC übereinstimmen. */
-const LABELS=["Ventil mit Gewalt öffnen","Unbeschriftetes Becherglas","Brandschutztür verkeilt","Gaswarnalarm bei Abfüllung","Abzugsalarm bei laufender Reaktion","Besucher ohne Begleitung","Unsicher, ob STOP nötig ist","Probenahmepunkt ohne Etikett","Offener Frontschieber am Abzug","Falsche PSA","Außerhalb der Markierungen","Handy beim Treppensteigen","Ausgelaufene Probe in der Rohrpost","Hektik und Frust","Probe ohne Etikett","Beschädigtes Glas"];
+const LABELS=["Ventil mit Gewalt öffnen","Unbeschriftetes Becherglas","Brandschutztür verkeilt","Gaswarnalarm bei Abfüllung","Abzugsalarm bei laufender Reaktion","Besucher ohne Begleitung","Unsicher, ob STOP nötig ist","Probenahmepunkt ohne Etikett","Offener Frontschieber am Abzug","Falsche PSA","Außerhalb der Markierungen","Handy beim Treppensteigen","Ausgelaufene Probe in der Rohrpost","Hektik und Frust","Probe ohne Etikett","Beschädigtes Glas","Etikettiertes Becherglas am Abzug (in Ordnung)","Ventil am Handrad (in Ordnung)","Fußweg und Stapler (in Ordnung)","Handy am Flurrand (in Ordnung)","Angekündigter Probealarm (in Ordnung)"];
 
 async function stats(){
   $.innerHTML=`<h1>Teamergebnisse</h1><p class="lead">Lade Daten …</p>`;
@@ -233,7 +257,7 @@ async function stats(){
   try{
     const snap=await fs.getDocs(fs.collection(db,"stop_answers"));
     const st=LABELS.map(()=>({n:0,best:0})), ses=new Set(); let tot=0;
-    snap.forEach(d=>{const v=d.data(); if(v.pts===undefined||!st[v.sc])return; st[v.sc].n++; if(v.pts===2)st[v.sc].best++; ses.add(v.sid); tot++});
+    snap.forEach(d=>{const v=d.data(); if(v.pts===undefined||!st[v.sc])return; st[v.sc].n++; if(v.pts===1)st[v.sc].best++; ses.add(v.sid); tot++});
     const rows=LABELS.map((l,k)=>({l,n:st[k].n,p:st[k].n?Math.round(st[k].best/st[k].n*100):null})).sort((a,b)=>(a.p??101)-(b.p??101));
     fin(`<h1>Teamergebnisse</h1>
     <p class="lead">Anteil der Antworten mit der sichersten Handlung. Rot markierte Situationen (unter 60 %) sind gute Themen für ein Teamgespräch. Die Daten sind anonym.</p>
