@@ -233,7 +233,22 @@ const SC=[
  o:[{t:"Kein STOP nötig: Er nutzt die Griffmulde richtig",s:1,f:"Richtig. Die Griffmulde schützt die Finger. Er nutzt sie wie vorgesehen."},
     {t:"Ihn auffordern, die Hand wegzunehmen",s:0,f:"Es gab keinen unsicheren Zustand. Hier wäre Ansprechen überflüssig."},
     {t:"Den Lift anhalten und den Notruf drücken",s:0,f:"Der Notruf ist für Notfälle gedacht. Hier gab es keine Gefahr."}],
- w:"Schutzeinrichtungen sind dazu da, genutzt zu werden. Wer sie nutzt, macht es richtig."}
+ w:"Schutzeinrichtungen sind dazu da, genutzt zu werden. Wer sie nutzt, macht es richtig."},
+{a:"Labor",q:"Eine Kollegin arbeitet im Abzug. Der Frontschieber steht auf Arbeitshöhe, der Abzug läuft ohne Alarm. Sie trägt Kittel, Schutzbrille und passende Handschuhe.",
+ o:[{t:"Kein STOP nötig: Die Arbeit läuft vorschriftsgemäß",s:1,f:"Richtig. Schieber auf Arbeitshöhe, Abzug ohne Alarm, passende PSA: Hier ist alles in Ordnung."},
+    {t:"STOP sagen und die Arbeit unterbrechen lassen",s:0,f:"Es gab keinen unsicheren Zustand. Bei echten Zweifeln ist Nachfragen trotzdem erlaubt."},
+    {t:"Sie auffordern, den Frontschieber ganz zu schließen",s:0,f:"Auf Arbeitshöhe ist der Schieber richtig eingestellt. Ganz geschlossen könnte sie nicht arbeiten."}],
+ w:"Wer eine korrekte Arbeitsweise erkennt, muss nichts ändern."},
+{a:"Betrieb",q:"Ein Bereich ist mit Absperrung und Schild gesperrt. Du musst in die Nähe und gehst außen um die Absperrung herum.",
+ o:[{t:"Kein STOP nötig: Außen herumgehen und die Absperrung respektieren",s:1,f:"Richtig. Die Absperrung erfüllt ihren Zweck, und du hältst dich daran."},
+    {t:"Die Absperrung kurz öffnen und durchgehen",s:0,f:"Nein. Absperrungen werden nicht geöffnet oder umgangen."},
+    {t:"STOP sagen und den Bereich melden",s:0,f:"Die Absperrung ist ordnungsgemäß. Es gibt keinen unsicheren Zustand zu melden."}],
+ w:"Absperrungen zeigen sichere Zustände an. Wer sie beachtet, macht es richtig."},
+{a:"Büro",q:"Eine Brandschutztür im Flur ist geschlossen und schließt selbstständig. Ein Kollege öffnet sie, geht durch und lässt sie wieder zufallen.",
+ o:[{t:"Kein STOP nötig: Die Tür funktioniert wie vorgesehen",s:1,f:"Richtig. Eine Brandschutztür soll selbstständig schließen. So erfüllt sie ihren Zweck."},
+    {t:"Einen Keil holen, damit die Tür offen bleibt",s:0,f:"Nie. Brandschutztüren dürfen nicht verkeilt werden."},
+    {t:"Meldungs-App-Eintrag schreiben, weil die Tür zufällt",s:0,f:"Das Zufallen ist gewollt. Ein Eintrag ist hier nicht nötig."}],
+ w:"Nicht jede Tür, die zufällt, ist ein Problem. Eine Brandschutztür muss es sogar."}
 ];
 
 /* ====== 3) APP ====== */
@@ -310,7 +325,7 @@ function end(){
   document.getElementById("st2").onclick=stats;
 }
 /* Kurzbezeichnungen für die Teamergebnisse. Reihenfolge muss mit SC übereinstimmen. */
-const LABELS=["Ventil mit Gewalt öffnen","Unbeschriftetes Becherglas","Brandschutztür verkeilt","Gaswarnalarm bei Abfüllung","Abzugsalarm bei laufender Reaktion","Besucher ohne Begleitung","Unsicher, ob STOP nötig ist","Probenahmepunkt ohne Etikett","Offener Frontschieber am Abzug","Falsche PSA","Außerhalb der Markierungen","Handy beim Treppensteigen","Ausgelaufene Probe in der Rohrpost","Hektik und Frust","Probe ohne Etikett","Beschädigtes Glas","Etikettiertes Becherglas am Abzug (in Ordnung)","Ventil am Handrad (in Ordnung)","Fußweg und Stapler (in Ordnung)","Handy am Flurrand (in Ordnung)","Probealarm für Räumungsalarm","Versperrte Notdusche","Kristalle am Lösemittel","Unverträglicher Abfall","Kaffeetasse im Labor","Defektes Kabel am Rührer","Gefährliche Arbeit allein am Abend","Offene Skalpelle und Kanülen","Fehlende Betriebsanweisung","Gesicherte Gasflasche (in Ordnung)","Abfallcontainer zu zweit (in Ordnung)","Abfallcontainer allein öffnen","Griffmulde im Lift (in Ordnung)"];
+const LABELS=["Ventil mit Gewalt öffnen","Unbeschriftetes Becherglas","Brandschutztür verkeilt","Gaswarnalarm bei Abfüllung","Abzugsalarm bei laufender Reaktion","Besucher ohne Begleitung","Unsicher, ob STOP nötig ist","Probenahmepunkt ohne Etikett","Offener Frontschieber am Abzug","Falsche PSA","Außerhalb der Markierungen","Handy beim Treppensteigen","Ausgelaufene Probe in der Rohrpost","Hektik und Frust","Probe ohne Etikett","Beschädigtes Glas","Etikettiertes Becherglas am Abzug (in Ordnung)","Ventil am Handrad (in Ordnung)","Fußweg und Stapler (in Ordnung)","Handy am Flurrand (in Ordnung)","Probealarm für Räumungsalarm","Versperrte Notdusche","Kristalle am Lösemittel","Unverträglicher Abfall","Kaffeetasse im Labor","Defektes Kabel am Rührer","Gefährliche Arbeit allein am Abend","Offene Skalpelle und Kanülen","Fehlende Betriebsanweisung","Gesicherte Gasflasche (in Ordnung)","Abfallcontainer zu zweit (in Ordnung)","Abfallcontainer allein öffnen","Griffmulde im Lift (in Ordnung)","Abzug korrekt benutzt (in Ordnung)","Absperrung respektiert (in Ordnung)","Brandschutztür schließt selbstständig (in Ordnung)"];
 
 async function stats(){
   $.innerHTML=`<h1>Teamergebnisse</h1><p class="lead">Lade Daten …</p>`;
