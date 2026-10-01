@@ -150,22 +150,22 @@ const SC=[
     {t:"Mit Klebeband sichern",s:0,f:"Klebeband verhindert kein Springen und wird vom Lösemittel angegriffen."}],
  w:"Glas mit Schäden ist Ausschuss, ohne Ausnahme."},
 {a:"Labor",q:"Am Abzug steht ein Becherglas mit vollständigem Etikett (Stoffname, Gefahrenpiktogramm, Datum, Kürzel). Der Frontschieber steht auf Arbeitshöhe, es gibt keinen Alarm. Du willst mit deiner Arbeit weitermachen.",
- o:[{t:"Weiterarbeiten. Es gibt hier nichts zu beanstanden",s:1,f:"Richtig. Der Inhalt ist eindeutig gekennzeichnet und der Abzug wird korrekt benutzt. Es gibt keinen unsicheren Zustand."},
+ o:[{t:"Kein STOP nötig: Weiterarbeiten. Es gibt hier nichts zu beanstanden",s:1,f:"Richtig. Der Inhalt ist eindeutig gekennzeichnet und der Abzug wird korrekt benutzt. Es gibt keinen unsicheren Zustand."},
     {t:"STOP sagen und die Laborleitung holen",s:0,f:"Hier war alles in Ordnung: Etikett vollständig, Schieber richtig, kein Alarm. Bei echten Zweifeln ist Nachfragen immer erlaubt, hier gab es aber keinen Grund."},
     {t:"Den Inhalt vorsichtshalber entsorgen",s:0,f:"Ein korrekt gekennzeichneter Stoff muss nicht entsorgt werden."}],
  w:"STOP heißt auch: erkennen, wann alles in Ordnung ist."},
 {a:"Produktion",q:"Ein Kollege öffnet ein Ventil am Handrad, ohne Gewalt und ohne Hilfsmittel. Er trägt die vorgeschriebene PSA und der Bereich ist ordnungsgemäß abgesperrt.",
- o:[{t:"Nichts unternehmen. Die Arbeit läuft wie vorgesehen",s:1,f:"Richtig. Handrad ohne Gewalt, PSA vorhanden, Bereich abgesperrt: Das ist ein sicherer Ablauf."},
+ o:[{t:"Kein STOP nötig: Die Arbeit läuft wie vorgesehen",s:1,f:"Richtig. Handrad ohne Gewalt, PSA vorhanden, Bereich abgesperrt: Das ist ein sicherer Ablauf."},
     {t:"Ihn unterbrechen und den Schichtleiter holen",s:0,f:"Es gibt keinen unsicheren Zustand. Unnötiges Unterbrechen kann selbst zu Fehlern führen."},
     {t:"Ihn bitten, zur Sicherheit auch noch den Bereich zu räumen",s:0,f:"Die Absperrung ist bereits ausreichend und vorgesehen."}],
  w:"Wer den sicheren Zustand erkennt, kann gelassen weiterarbeiten."},
 {a:"Produktion",q:"Du gehst auf dem markierten Fußweg. Ein Stapler kreuzt vor dir in der Fahrzone. Dort ist kein Fußgängerüberweg. Der Fahrer hat Blickkontakt mit dir aufgenommen und biegt ab.",
- o:[{t:"Auf dem Fußweg bleiben, den Stapler passieren lassen und dann weitergehen",s:1,f:"Richtig. Du bist im richtigen Bereich und der Fahrer hat dich gesehen. Die Situation ist unter Kontrolle."},
+ o:[{t:"Kein STOP nötig: Auf dem Fußweg bleiben, den Stapler passieren lassen und dann weitergehen",s:1,f:"Richtig. Du bist im richtigen Bereich und der Fahrer hat dich gesehen. Die Situation ist unter Kontrolle."},
     {t:"STOP rufen und den Stapler anhalten lassen",s:0,f:"Es gibt keinen unsicheren Zustand. Wer STOP ruft, obwohl alles korrekt läuft, bremst unnötig."},
     {t:"Schnell vor dem Stapler über die Fahrzone laufen",s:0,f:"Nie. Auch mit Blickkontakt gehören Fußgänger nicht in die Fahrzone."}],
  w:"Markierungen, Blickkontakt und Vorfahrt klären das Zusammenspiel."},
 {a:"Alle Bereiche",q:"Ein Kollege bleibt am Rand des Flurs stehen und liest eine Nachricht auf dem Handy. Er steht weder auf einer Treppe noch im Weg.",
- o:[{t:"Nichts sagen und weitergehen",s:1,f:"Richtig. Er steht sicher und blockiert niemanden. Das ist genau das richtige Verhalten."},
+ o:[{t:"Kein STOP nötig: weitergehen",s:1,f:"Richtig. Er steht sicher und blockiert niemanden. Das ist genau das richtige Verhalten."},
     {t:"Ihn ansprechen und auffordern, das Handy wegzustecken",s:0,f:"Es gibt keinen unsicheren Zustand. Hier wäre Ansprechen überflüssig und würde Vertrauen kosten."},
     {t:"Den Vorgesetzten über den Kollegen informieren",s:0,f:"Ohne Gefährdung gibt es nichts zu melden."}],
  w:"Entscheidend ist nicht das Handy, sondern ob jemand beim Gehen abgelenkt ist."},
@@ -215,12 +215,12 @@ const SC=[
     {t:"Erst im Kleinen ausprobieren",s:0,f:"Auch kleine Mengen können gefährlich sein. Erst beurteilen, dann testen."}],
  w:"Neue Arbeiten brauchen erst die Beurteilung, dann den Start."},
 {a:"Labor",q:"Eine Druckgasflasche steht mit Gurt an der Wand gesichert, ist gekennzeichnet und trägt die Schutzkappe. Du arbeitest daneben.",
- o:[{t:"Weiterarbeiten. Die Flasche ist korrekt gesichert",s:1,f:"Richtig. Gesichert, gekennzeichnet und mit Kappe: Hier ist alles in Ordnung."},
+ o:[{t:"Kein STOP nötig: Weiterarbeiten. Die Flasche ist korrekt gesichert",s:1,f:"Richtig. Gesichert, gekennzeichnet und mit Kappe: Hier ist alles in Ordnung."},
     {t:"STOP sagen und die Flasche entfernen lassen",s:0,f:"Hier war alles in Ordnung. Bei echten Zweifeln ist Nachfragen trotzdem erlaubt."},
     {t:"Die Flasche zur Sicherheit hinlegen",s:0,f:"Nein. Druckgasflaschen werden stehend und gesichert gelagert."}],
  w:"Auch erkennen, wann alles in Ordnung ist, gehört zur Sicherheitskultur."},
 {a:"Betrieb",q:"Zwei Kollegen öffnen den großen Container für Vitaminabfälle. Beide tragen Handschuhe und öffnen ihn gemeinsam, wie es vorgeschrieben ist.",
- o:[{t:"Nichts unternehmen. Der Ablauf entspricht der Vorgabe",s:1,f:"Richtig. Zu zweit und mit Handschuhen: So darf der Container geöffnet werden."},
+ o:[{t:"Kein STOP nötig: Der Ablauf entspricht der Vorgabe",s:1,f:"Richtig. Zu zweit und mit Handschuhen: So darf der Container geöffnet werden."},
     {t:"STOP sagen und das Öffnen unterbrechen",s:0,f:"Es gab keinen unsicheren Zustand. Bei echten Zweifeln ist Nachfragen trotzdem erlaubt."},
     {t:"Die Aufsicht informieren, dass der Container geöffnet wird",s:0,f:"Nicht nötig. Der Ablauf ist vorgesehen und wurde eingehalten."}],
  w:"Wer sicher arbeitet, braucht kein STOP."},
@@ -230,7 +230,7 @@ const SC=[
     {t:"Mit einem Rohrstück als Hebel allein öffnen",s:0,f:"Improvisierte Hilfsmittel ersetzen keine zweite Person und erhöhen das Risiko."}],
  w:"Regeln mit zwei Personen gelten auch dann, wenn niemand Zeit hat."},
 {a:"Betrieb",q:"Du fährst mit dem Lift. Ein Kollege greift dabei in die Griffmulde, die dafür vorgesehen ist, um die Finger zu schützen.",
- o:[{t:"Nichts unternehmen. Er nutzt die Griffmulde richtig",s:1,f:"Richtig. Die Griffmulde schützt die Finger. Er nutzt sie wie vorgesehen."},
+ o:[{t:"Kein STOP nötig: Er nutzt die Griffmulde richtig",s:1,f:"Richtig. Die Griffmulde schützt die Finger. Er nutzt sie wie vorgesehen."},
     {t:"Ihn auffordern, die Hand wegzunehmen",s:0,f:"Es gab keinen unsicheren Zustand. Hier wäre Ansprechen überflüssig."},
     {t:"Den Lift anhalten und den Notruf drücken",s:0,f:"Der Notruf ist für Notfälle gedacht. Hier gab es keine Gefahr."}],
  w:"Schutzeinrichtungen sind dazu da, genutzt zu werden. Wer sie nutzt, macht es richtig."}
@@ -240,13 +240,16 @@ const SC=[
 const $=document.getElementById("app");
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let i=0, pts=0, order=[];
+const PER_RUN=20; // Anzahl Fragen pro Durchgang
+const N=Math.min(PER_RUN,SC.length);
+const shuffle=a=>{a=[...a];for(let n=a.length-1;n>0;n--){const m=Math.floor(Math.random()*(n+1));[a[n],a[m]]=[a[m],a[n]]}return a};
 const sid=Math.random().toString(36).slice(2,10);
 
 function start(){
-  i=0;pts=0;order=[...SC.keys()].sort(()=>Math.random()-.5);
+  i=0;pts=0;order=shuffle(SC.keys()).slice(0,N);
   $.innerHTML=`<div class="stop" aria-hidden="true">STOP</div>
   <h1>Würdest du STOP sagen?</h1>
-  <p class="lead">${SC.length} Situationen aus Produktion, Labor und Büro. Nicht in jeder Situation ist STOP nötig. Schau genau hin.</p>
+  <p class="lead">${N} Situationen aus Produktion, Labor und Büro. Nicht in jeder Situation ist STOP nötig. Schau genau hin.</p>
   <button class="primary" id="go">Quiz starten</button>
   <button class="mode" id="st"><b>Teamergebnisse</b><span>Wo entscheiden wir uns sicher und wo lohnt sich ein Gespräch?</span></button>
   <p><small>Antworten werden anonym gespeichert${db?"":" (derzeit nur lokal, da keine Datenbank verbunden ist)"}.</small></p>`;
@@ -256,10 +259,10 @@ function start(){
 
 function show(){
   const id=order[i], s=SC[id];
-  $.innerHTML=`<div class="top"><span>Situation ${i+1} von ${SC.length}</span><span>${pts} Punkte</span></div>
-  <div class="bar"><i style="width:${i/SC.length*100}%"></i></div>
+  $.innerHTML=`<div class="top"><span>Situation ${i+1} von ${N}</span><span>${pts} Punkte</span></div>
+  <div class="bar"><i style="width:${i/N*100}%"></i></div>
   <div class="card"><div class="area">${esc(s.a)}</div><h2 style="margin-top:6px">${esc(s.q)}</h2></div>
-  <div id="opts">${s.o.map((o,k)=>[o,k]).sort(()=>Math.random()-.5).map(([o,k])=>`<button class="opt" data-k="${k}">${esc(o.t)}</button>`).join("")}</div>
+  <div id="opts">${shuffle(s.o.map((o,k)=>[o,k])).map(([o,k])=>`<button class="opt" data-k="${k}">${esc(o.t)}</button>`).join("")}</div>
   <div id="res"></div>`;
   $.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(id,+b.dataset.k));
 }
@@ -278,8 +281,8 @@ async function answer(id,k){
   const res=document.getElementById("res");
   res.innerHTML=`${k!==best?`<div class="card"><b>Sicherste Handlung:</b> ${esc(s.o[best].t)}<p class="fb">${esc(s.o[best].f)}</p></div>`:""}
   <div class="why"><b>Merksatz:</b> ${esc(s.w)}</div>
-  <button class="primary" id="next">${i+1<SC.length?"Nächste Situation":"Ergebnis ansehen"}</button>`;
-  document.getElementById("next").onclick=()=>{i++;i<SC.length?show():end()};
+  <button class="primary" id="next">${i+1<N?"Nächste Situation":"Ergebnis ansehen"}</button>`;
+  document.getElementById("next").onclick=()=>{i++;i<N?show():end()};
   // Antwort speichern, Verteilung laden
   const counts=s.o.map(()=>0);
   try{
@@ -294,7 +297,7 @@ async function answer(id,k){
 }
 
 function end(){
-  const max=SC.length;
+  const max=N;
   const msg=pts>=max*.85?"Stark. Du erkennst unsichere Zustände sicher.":pts>=max*.6?"Solide. Einige Situationen lohnen sich noch einmal.":"Gut, dass du geübt hast. Im Zweifel gilt immer STOP.";
   $.innerHTML=`<div class="stop" aria-hidden="true">STOP</div>
   <h1>Dein Ergebnis</h1>
