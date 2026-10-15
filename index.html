@@ -199,7 +199,7 @@ const SC=[
     {t:"Mit Isolierband umwickeln und weiterarbeiten",s:0,f:"Isolierband ist keine zulässige Reparatur an Elektrogeräten."},
     {t:"Weiterlaufen lassen, bis der Ansatz fertig ist",s:0,f:"Der Defekt bleibt Gefahr für Stromschlag und Zündung."}],
  w:"Defekte Geräte werden stillgelegt, nicht notdürftig repariert."},
-{a:"Labor",q:"Es ist spät am Abend. Du sollst noch eine Arbeit mit Gefahrpotential ansetzen. Niemand weiß, dass du noch da bist.",
+{a:"Labor",q:"Es ist spät am Abend. Du sollst noch eine Analytik mit Gefahrpotential ansetzen. Niemand weiß, dass du noch da bist.",
  o:[{t:"STOP: Nicht allein beginnen, Vorgesetzte informieren und die Arbeit mit zweiter Person oder auf später verschieben",s:1,f:"Richtig. Bei Unfall oder Unwohlsein würde niemand helfen. Gefährliche Arbeiten brauchen eine Alleinarbeitsregelung."},
     {t:"Anfangen, es dauert ja nicht lange",s:0,f:"Gerade kurze Arbeiten werden unterschätzt. Wer allein ist, kann keine Hilfe holen."},
     {t:"Anfangen und einer Kollegin vorher eine Nachricht schicken",s:0,f:"Eine Nachricht ersetzt keine Anwesenheit und keine Alleinarbeitsregelung."}],
@@ -255,7 +255,7 @@ const SC=[
 const $=document.getElementById("app");
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let i=0, pts=0, order=[];
-const PER_RUN=20; // Anzahl Fragen pro Durchgang
+const PER_RUN=10; // Anzahl Fragen pro Durchgang
 const N=Math.min(PER_RUN,SC.length);
 const shuffle=a=>{a=[...a];for(let n=a.length-1;n>0;n--){const m=Math.floor(Math.random()*(n+1));[a[n],a[m]]=[a[m],a[n]]}return a};
 const sid=Math.random().toString(36).slice(2,10);
